@@ -14,6 +14,8 @@ I built this local planner while figuring out which parts to print for my own mo
 
 [Download v0.1.0](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0) · [Setup instructions](README.md#start-here-installation-and-first-use) · [Report a problem](https://github.com/hp0411-oss/vault-print-planner-skill/issues/new/choose)
 
+Built on [marcelfarres/vault-configurator](https://github.com/marcelfarres/vault-configurator), under AGPL-3.0. This version adds the bilingual planner workflow, accessory-only selection, task recovery and print-progress records.
+
 ## Looking for the first 3–5 testers
 
 Do you already own the matching VAULT model archive? Please try this short workflow:
@@ -38,6 +40,8 @@ Please do not attach purchased STLs, 3MFs containing paid models, access codes o
 - 已验证 macOS 安装和导出基础流程；Windows/Linux 尚待实际测试。组装预览只是示意，不是工程验证。
 
 [下载 v0.1.0](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0) · [中文安装说明](README.zh-CN.md) · [反馈问题](https://github.com/hp0411-oss/vault-print-planner-skill/issues/new/choose)
+
+基于 [marcelfarres/vault-configurator](https://github.com/marcelfarres/vault-configurator)，遵循 AGPL-3.0；本版本增加中英文规划流程、单独配件选择、任务恢复和打印进度记录。
 
 ### 招募首批 3～5 位试用者
 
