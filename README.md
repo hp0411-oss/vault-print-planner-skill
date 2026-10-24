@@ -6,6 +6,18 @@ A local bilingual planner and Codex skill for USSA VAULT modular drawers and sto
 
 Download **vault-print-planner-skill.zip** from this repository and extract it first. Paths below refer to the extracted folder.
 
+## Interface preview
+
+Actual interface screenshots using an example configuration, with no personal print records. The 3D assembly is a simplified illustration for feature reference, not a printable model or a validated assembly simulation. Model files must be purchased separately and used locally.
+
+**English — configuration and open assembly preview**
+
+![English planner interface with configuration controls and a simplified assembly preview](interface-en.jpg)
+
+**简体中文 — 中文选型与组合预览**
+
+![Chinese planner interface with language switching and a simplified assembly preview](interface-zh-CN.jpg)
+
 ## Chinese / English switch
 
 Use the language selector at the top right of the planner. Your current configuration and accessory quantities carry over, and the browser remembers your language. Both versions share the same saved tasks and print records. User-entered names, notes, original filenames, and images from the original manuals retain their original language. Save progress-record edits before switching languages.
