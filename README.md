@@ -10,6 +10,14 @@ VAULT models are **not included**: purchase them separately and use your local a
 
 Download **vault-print-planner-skill.zip** from this repository and extract it first. Paths below refer to the extracted folder.
 
+## 42-second walkthrough
+
+![Screenshot walkthrough: configuration, choices, plate checks, parts and hardware](walkthrough.gif)
+
+[Watch / download the MP4](walkthrough.mp4) · [Try it and share feedback](TRY-IT.md) · [Report a problem or suggest a feature](https://github.com/hp0411-oss/vault-print-planner-skill/issues/new/choose)
+
+A captioned screenshot tour, not a live recording or a physical-print demonstration. Preview geometry is illustrative. Exported projects still require inspection and slicing in Bambu Studio.
+
 ## Start here: installation and first use
 
 **You can run the website without Codex or a ChatGPT subscription.** The optional skill is for agent-assisted use. This is a local Python application, not a hosted online service or a one-click installer.

@@ -16,6 +16,14 @@
 
 当前规划流程针对 P1S、0.4/0.6 mm 喷嘴、PLA/PETG。不会自动发送打印。必须使用自己合法取得的 VAULT 模型和说明书；仓库不附带模型；说明书的使用方式见下文。
 
+## 42 秒界面导览
+
+![选型、选项、适配检查、文件和五金清单的截图导览](walkthrough.gif)
+
+[播放 / 下载 MP4](walkthrough.mp4) · [试用介绍与反馈步骤](TRY-IT.md#简体中文) · [提交问题或建议](https://github.com/hp0411-oss/vault-print-planner-skill/issues/new/choose)
+
+这是带字幕的截图导览，不是实时操作录像或实物打印演示。组装图为示意；导出的项目仍需在 Bambu Studio 中检查并切片。
+
 ## 从这里开始：安装与第一次使用
 
 **只用网页工具不需要 Codex，也不需要 ChatGPT 订阅。** skill 是可选的助手使用方式。这是需要本地启动的 Python 程序，不是在线托管网页，也还不是双击安装的软件。
