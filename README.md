@@ -12,7 +12,7 @@ Use the language selector at the top right of the planner. Your current configur
 
 ## Run the standalone planner
 
-Requires Python 3.11+, initialized Bambu Studio profiles, and your own legally obtained VAULT model archive and manuals. Models and manuals are not included.
+Requires Python 3.11+, initialized Bambu Studio profiles, and your own legally obtained VAULT model archive and manuals. Model files are not included. See the model and manual policy below.
 
 ```sh
 python3 -m venv .venv
@@ -21,6 +21,14 @@ python3 -m venv .venv
 ```
 
 Open http://127.0.0.1:8766/planner.html in Chrome or another browser. On Windows, use `.venv\Scripts\python.exe`. The automatic Open in Bambu Studio action currently supports macOS only; open exported 3MF files manually on other systems. Keep the local server running. Do not expose this unauthenticated service to the public internet.
+
+## Model purchase, local deployment, and manuals
+
+**This tool does not include or distribute VAULT model files. Each user must purchase the models from the designer or an authorized seller and comply with the model license.** Download and extract your purchased archive on your own computer, then pass that local folder to `--archive`. This tool and its AGPL license do not grant rights to the VAULT models.
+
+Keep model files and anything containing their geometry local: STL/STEP/3MF files, converted meshes, print projects, and model archives must not be uploaded to this repository or included in release packages. The local planner reads your archive to preview parts and prepare print projects; it does not require uploading the models to GitHub.
+
+Manuals may be used as reference material for selection, printing, and assembly. Read the user’s local manuals when needed. A manual may also be included as a reference resource when its redistribution is permitted by the rights holder; permission to use a local manual is not automatically permission to republish it. No third-party manuals are bundled in the current package.
 
 ## Install the skill
 
