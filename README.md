@@ -1,20 +1,18 @@
 # VAULT Print Planner Skill
 
-中文 VAULT 模块化收纳打印规划工具与 Codex skill：选组合、单独补配件、查看简化 3D 装配、保存/恢复打印任务、记录已打印数量及整体组合进度，并导出 Bambu Studio 3MF 工程。
+English | [简体中文](README.zh-CN.md)
 
-当前中文流程针对 P1S、0.4/0.6 mm 喷嘴、PLA/PETG。不会自动发送打印。必须使用自己合法取得的 VAULT 模型和说明书；仓库不附带这些文件。
+A local bilingual planner and Codex skill for USSA VAULT modular drawers and storage boxes. Configure complete builds or accessories, inspect simplified 3D assemblies and actual STL parts, save and restore print tasks, track completed sets, and export Bambu Studio 3MF projects.
 
-仓库提供完整源码安装包：[下载 vault-print-planner-skill.zip](vault-print-planner-skill.zip)。先解压，下面的路径相对于解压后的文件夹。包内包含 skill、网页工具源代码及依赖说明，不包含模型或打印记录。
+Download **vault-print-planner-skill.zip** from this repository and extract it first. Paths below refer to the extracted folder.
 
-## 安装 skill
+## Chinese / English switch
 
-把 `skills/vault-print-planner` 整个文件夹复制到 `~/.codex/skills/`（或自己的 `$CODEX_HOME/skills/`），重新开始会话后使用 `$vault-print-planner`。
+Use the language selector at the top right of the planner. Your current configuration and accessory quantities carry over, and the browser remembers your language. Both versions share the same saved tasks and print records. User-entered names, notes, original filenames, and images from the original manuals retain their original language. Save progress-record edits before switching languages.
 
-例如：“用 $vault-print-planner 选一组 M5 抽屉，另外补两套底板，并检查打印板前缘挤出线。”
+## Run the standalone planner
 
-## 单独运行网页
-
-需要 Python 3.11+ 和已安装的 Bambu Studio 预设。
+Requires Python 3.11+, initialized Bambu Studio profiles, and your own legally obtained VAULT model archive and manuals. Models and manuals are not included.
 
 ```sh
 python3 -m venv .venv
@@ -22,18 +20,28 @@ python3 -m venv .venv
 .venv/bin/python skills/vault-print-planner/scripts/launch.py --archive '/path/to/VAULT' --port 8766
 ```
 
-用 Chrome 或其他浏览器打开 http://127.0.0.1:8766/planner.html 。Windows 可改用 `.venv\Scripts\python.exe`；自动“打开 Bambu Studio”按钮目前仅适配 macOS。
+Open http://127.0.0.1:8766/planner.html in Chrome or another browser. On Windows, use `.venv\Scripts\python.exe`. The automatic Open in Bambu Studio action currently supports macOS only; open exported 3MF files manually on other systems. Keep the local server running. Do not expose this unauthenticated service to the public internet.
 
-## 打印边界
+## Install the skill
 
-导出的 3MF 是待检查的工程，不是已经验证可开打的指令。当前打包版补充了保守的前缘和板边留量；仍需检查实际起始 G-code、brim、支撑、材料预设及 AMS 对应关系。大件可能需要手动排板或分盘，不自动缩放。简化装配图不是精确装配仿真。
+Copy `skills/vault-print-planner` into `~/.codex/skills/` (or your `$CODEX_HOME/skills/` folder). Start a new session and invoke `$vault-print-planner`.
 
-原本一次打印中，小配件与前缘预挤出线重叠，因此 skill 明确要求把“几何放得下”和“实际首层路径无冲突”分开核对。已保存的历史工程不会自动套用新的留量。
+Example: “Use $vault-print-planner to configure an M5 drawer build, add two replacement baseplates, and check clearance from the front purge line.”
 
-## 来源与许可
+## Printing scope
 
-应用基于 [marcelfarres/vault-configurator](https://github.com/marcelfarres/vault-configurator) 的下载版本修改，遵循 [GNU AGPL v3](LICENSE)。本仓库增加中文规划入口、配件模式、删除恢复、完成记录、组合预览、skill 说明及保守 P1S 留边。无原仓库 Git 历史，不能声称它是正式 GitHub fork 或某个已核实 commit。
+The planner targets the P1S, 0.4 / 0.6 mm nozzles, and PLA / PETG. Exporting or opening a project does not start printing. A 3MF export still needs slicer inspection: verify the actual printer, nozzle, filament, plate, AMS mapping, start G-code, brim, and supports.
 
-Three.js 保留其 `vendor/three/LICENSE`。VAULT 模型、说明书及品牌属于 USSA Design，不在本仓库授权范围内。本工具非 USSA Design 或 Bambu Lab 官方产品。设计师的耗材统计未附带，空数据文件仅用于启动；最终重量/时间以切片器为准。
+The packaged planner includes conservative front and edge clearances. Larger parts may require manual layout or separate plates; never scale assembly parts to fit. Old exported projects do not automatically receive updated clearances. Simplified previews do not validate dimensions, assembly tolerances, motion, load capacity, or stability.
 
-打印记录、输出工程、缓存、原始模型和个人路径仅保存在本地，并由 .gitignore 排除。
+## Development
+
+Chinese frontend sources are `planner.html`, `planner-preview.js`, and `planner-overview.js` under `skills/vault-print-planner/assets/app/`. Edit `tools/translations.tsv` and run `python3 tools/build_languages.py` to regenerate English assets and the response translation dictionary. System messages are translated; user-authored text and model paths are preserved. The original upstream configurator is separate from the bilingual planner.
+
+## Credits and license
+
+Based on a downloaded version of [marcelfarres/vault-configurator](https://github.com/marcelfarres/vault-configurator), under [GNU AGPL v3](LICENSE). Additions include the bilingual planner, accessory-only mode, task deletion and recovery, completion records, assembly previews, skill instructions, and conservative P1S clearances. This package does not retain upstream Git history or claim a verified upstream commit.
+
+Three.js retains its bundled license. VAULT models, manuals, and brands belong to USSA Design and are not licensed by this repository. This is not an official USSA Design or Bambu Lab product. Designer print statistics are excluded; the slicer is authoritative for weight and time.
+
+Models, generated files, caches, personal paths, and print records remain local and are excluded by `.gitignore`.
