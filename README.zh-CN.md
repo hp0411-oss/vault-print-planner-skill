@@ -4,7 +4,7 @@
 
 **为 USSA VAULT 模块化收纳箱和抽屉规划 3D 打印，并导出 Bambu Studio 3MF 工程。** 这是非官方的本地打印规划器，也可以作为 Codex skill 使用。支持抽屉与翻盖箱选型、Gridfinity 底板和锁等配件补打、三维预览、STL 零件清单、P1S 初步排板、五金清单与打印进度记录。
 
-**[下载 v0.1.0 预发布版](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0)** · [English guide](README.md)
+**[下载 v0.1.0 最新版](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0)** · [English guide](README.md)
 
 **不附带模型文件**：请自行购买，并使用本地模型目录。本工具不是 USSA Design 或 Bambu Lab 官方产品。
 

@@ -4,7 +4,7 @@ English | [简体中文](README.zh-CN.md)
 
 **Plan USSA VAULT modular storage prints for Bambu Lab P1S, from drawer configuration to Bambu Studio 3MF export.** This unofficial, local 3D printing planner also works as a Codex skill. Choose drawers, hinged storage boxes, Gridfinity baseplates, locks, and replacement accessories; preview assemblies, review STL parts lists and hardware, check initial plate fit, and track print progress. Available in English and 简体中文.
 
-**[Download v0.1.0 (pre-release)](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0)** · [Installation](#start-here-installation-and-first-use) · [Screenshots](#interface-preview) · [中文说明](README.zh-CN.md)
+**[Download v0.1.0 (Latest)](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0)** · [Installation](#start-here-installation-and-first-use) · [Screenshots](#interface-preview) · [中文说明](README.zh-CN.md)
 
 VAULT models are **not included**: purchase them separately and use your local archive. This is not an official USSA Design or Bambu Lab product.
 
