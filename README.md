@@ -18,6 +18,32 @@ Actual interface screenshots using an example configuration, with no personal pr
 
 ![Chinese planner interface with language switching and a simplified assembly preview](interface-zh-CN.jpg)
 
+## Explore options and review the print checklist
+
+Use **Show all choices** above the layer settings to expand module type, height, drawer arrangement, interior, and lock choices together. Use **Collapse choices** to return to compact dropdowns. Available options depend on the chosen size; 1F / 2F / 4F are height classes, not drawer counts. The example uses a 2F shell containing two 1F drawers.
+
+![Expanded module type, height, drawer arrangement and interior choices](options-expanded.jpg)
+
+After choosing a build, filament, and nozzle, select **Check parts and plate layout** and scroll down:
+
+| What you can review | What it means |
+| --- | --- |
+| Complete parts list | Source STL filenames, quantities, dimensions, thumbnails, support flags, and source notes. Quantities count complete STL files; a file can contain paired parts. |
+| Filament and nozzle | PLA or PETG and 0.4 / 0.6 mm are selected for the whole task. The tool does not automatically recommend a different material per part. Verify the actual product profile in Studio. |
+| Does it fit your printer? | Initial geometric layout for the supported P1S profile. Missing files or parts that cannot fit are reported. This does not certify fit for other printers or validate the final toolpaths. |
+| Plates and hardware | An initial per-plate file list plus separately purchased hardware and quantities. Hardware varies with the selected build. |
+| Guidance | Size naming, stacking and assembly references, source notes, support flags, and preflight reminders. Manuals are read from the local archive. |
+
+**Example check:** S3, 2F shell, two 1F drawers, grid cover, PETG, 0.4 mm nozzle: 14 part entries, 27 whole-file instances, and 3 initial plates. This example is illustrative, not a universal bill of materials or a validated ready-to-print project.
+
+![Selected PETG and nozzle with initial parts and plate check results](print-check.jpg)
+
+![Printable parts with quantities, dimensions and support requirements](parts-list.jpg)
+
+The example hardware list contains **8 × M4 × 14 mm bolts**. Verify head shape, length, and assembly requirements against the matching manual before buying; the abbreviated list is not a product recommendation. Inspect actual start-line, brim, supports, first layer, and warnings after slicing every plate in Bambu Studio.
+
+![Hardware quantities and expanded per-plate file list](hardware-plates.jpg)
+
 ## Chinese / English switch
 
 Use the language selector at the top right of the planner. Your current configuration and accessory quantities carry over, and the browser remembers your language. Both versions share the same saved tasks and print records. User-entered names, notes, original filenames, and images from the original manuals retain their original language. Save progress-record edits before switching languages.
