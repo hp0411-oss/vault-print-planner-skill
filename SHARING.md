@@ -11,7 +11,7 @@ These are prepared drafts, not posts that have been sent. / 以下是待发布�
 
 ## Short English post
 
-I made a free, open-source local planner for my USSA VAULT storage builds. Choose drawers or accessories, preview the combination, review source files and hardware, and export a P1S 3MF project for Bambu Studio. English + Chinese; optional Codex skill, but the website also runs on its own.
+I made a free, open-source local planner for my USSA VAULT storage builds. Choose drawers or accessories, preview the combination, review source files and hardware, and export a 3MF project for the selected supported Bambu machine for Bambu Studio. English + Chinese; optional Codex skill, but the website also runs on its own.
 
 Based on marcelfarres/vault-configurator (AGPL-3.0), with a bilingual planner workflow, accessory-only selection and progress records.
 
@@ -21,7 +21,7 @@ Demo, download and setup: https://github.com/hp0411-oss/vault-print-planner-skil
 
 ## 中文短文案
 
-我在打印 USSA VAULT 组合收纳箱时，做了一个免费开源的本地规划工具：选抽屉或单独配件、看组合示意、查文件和五金清单，再导出 P1S 的 3MF 项目到 Bambu Studio。支持中英文，也可以作为 Codex Skill 使用；单独运行网页不需要 ChatGPT 订阅。
+我在打印 USSA VAULT 组合收纳箱时，做了一个免费开源的本地规划工具：选抽屉或单独配件、看组合示意、查文件和五金清单，再导出所选支持机型的 3MF 项目到 Bambu Studio。支持中英文，也可以作为 Codex Skill 使用；单独运行网页不需要 ChatGPT 订阅。
 
 基于 marcelfarres/vault-configurator（AGPL-3.0），增加中英文规划流程、单独配件选择和进度记录。
 
@@ -60,7 +60,7 @@ Official source for the campaign link: [USSA VAULT page](https://www.ussadesign.
 
 Hello USSA team,
 
-I'm using VAULT and have put together an unofficial, free, open-source local planning tool based on marcelfarres/vault-configurator (AGPL-3.0). This version adds an English/Chinese workflow, accessory-only selection and print-progress records, with P1S 3MF export for Bambu Studio.
+I'm using VAULT and have put together an unofficial, free, open-source local planning tool based on marcelfarres/vault-configurator (AGPL-3.0). This version adds an English/Chinese workflow, accessory-only selection and print-progress records, with selected-machine 3MF export for Bambu Studio.
 
 It includes no VAULT model files or third-party manuals; users must purchase and use their own local archive. It does not claim USSA endorsement, and exported projects still need slicer checks.
 
@@ -74,7 +74,7 @@ Thank you!
 
 I'm a VAULT user looking for a few people to try a bilingual planning workflow. This is an unofficial extension based on marcelfarres/vault-configurator (credit to the original project), adding English/Chinese switching, accessory-only selection, saved-task recovery and print-progress records.
 
-It is free/open source, runs locally, and requires your own purchased VAULT archive. No paid model files are distributed. The initial target is Bambu P1S; macOS has been smoke-tested and Windows/Linux feedback would help. You don't need to do a physical print to test installation and opening an exported 3MF in Studio.
+It is free/open source, runs locally, and requires your own purchased VAULT archive. No paid model files are distributed. The current main-branch package reads installed single-nozzle Bambu profiles (0.4/0.6 mm, PLA/PETG); dual-nozzle machines are not supported yet; macOS has been smoke-tested and Windows/Linux feedback would help. You don't need to do a physical print to test installation and opening an exported 3MF in Studio.
 
 Demo, download and limitations: https://github.com/hp0411-oss/vault-print-planner-skill
 

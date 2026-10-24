@@ -2,13 +2,23 @@
 
 English | [简体中文](README.zh-CN.md)
 
-**Plan USSA VAULT modular storage prints for Bambu Lab P1S, from drawer configuration to Bambu Studio 3MF export.** This unofficial, local 3D printing planner also works as a Codex skill. Choose drawers, hinged storage boxes, Gridfinity baseplates, locks, and replacement accessories; preview assemblies, review STL parts lists and hardware, check initial plate fit, and track print progress. Available in English and 简体中文.
+**Plan USSA VAULT modular storage prints for Bambu Studio, from drawer configuration to Bambu Studio 3MF export.** This unofficial, local 3D printing planner also works as a Codex skill. Choose drawers, hinged storage boxes, Gridfinity baseplates, locks, and replacement accessories; preview assemblies, review STL parts lists and hardware, check initial plate fit, and track print progress. Available in English and 简体中文.
 
-**[Download v0.1.0 (Latest)](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0)** · [Installation](#start-here-installation-and-first-use) · [Screenshots](#interface-preview) · [中文说明](README.zh-CN.md)
+**[Download current multi-printer package](https://github.com/hp0411-oss/vault-print-planner-skill/raw/refs/heads/main/vault-print-planner-skill.zip)** · [Original v0.1.0 release](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0) · [Installation](#start-here-installation-and-first-use) · [Screenshots](#interface-preview) · [中文说明](README.zh-CN.md)
 
 VAULT models are **not included**: purchase them separately and use your local archive. This is not an official USSA Design or Bambu Lab product.
 
 Download **vault-print-planner-skill.zip** from this repository and extract it first. Paths below refer to the extracted folder.
+
+## Multi-printer update (main branch)
+
+**[Download the current multi-printer package](https://github.com/hp0411-oss/vault-print-planner-skill/raw/refs/heads/main/vault-print-planner-skill.zip)**. The tagged **v0.1.0 release remains the original P1S-only snapshot**; the following current setup instructions describe the main-branch package. Earlier screenshots/video show v0.1.0 and its P1S export label.
+
+Choose **Printer model** before checking a build. The list comes from your installed Bambu Studio profiles, not a promise that every Bambu machine is supported. The current local profile set exposes A1 mini, A1, P1P, P1S, P2S, X1, X1 Carbon, X1E, H2S and A2L. Availability depends on your Studio installation. Single-nozzle rectangular beds only; dual-nozzle H2C/H2D/H2D Pro/X2D profiles are disabled. 0.2/0.8 mm workflows are not supported yet.
+
+The selected machine controls bed size, height, exclusion-area clearance and matching process/filament presets in the 3MF. Saved tasks remember model and nozzle. Old tasks without a model keep P1S; old exported files are not rewritten. To change an old task, load it, choose the machine, recheck and save a new task.
+
+**Validation:** 40 installed machine/nozzle/material combinations resolved; six regression tests passed. P1S 0.4, A1 0.6 and H2S 0.4 projects were exported and read back to verify printer, nozzle, PETG preset and in-bed geometry. A1 mini correctly rejected an oversized example; unknown/dual-nozzle models were rejected and legacy tasks retained P1S. These are software checks on macOS, not physical-print or slicer-toolpath validation for those machines.
 
 ## 42-second walkthrough
 
@@ -25,7 +35,7 @@ A captioned screenshot tour, not a live recording or a physical-print demonstrat
 ### 1. Prepare the software and your purchased models
 
 - Install Python **3.11 or newer**. On Windows, enable the Python installer’s PATH option. Check with `python3 --version` on macOS/Linux or `py --version` on Windows.
-- Install Bambu Studio, open it once, finish the setup wizard, and enable **P1S**, your **0.4 or 0.6 mm nozzle**, and PLA/PETG filament profiles. The planner reads profiles from your local Studio configuration; a printer connection is not needed just to plan/export.
+- Install Bambu Studio, open it once, finish the setup wizard, and enable **your printer model**, your **0.4 or 0.6 mm nozzle**, and PLA/PETG filament profiles. The planner reads profiles from your local Studio configuration; a printer connection is not needed just to plan/export.
 - Purchase VAULT models separately and fully extract them. Use the folder directly containing `01. DRAWERS`, `02. SUSTAINERS`, and `03. MODIFICATIONS`, not the ZIP file or the parent Downloads folder. This version was tested with the `261020_VAULT_USSA` archive layout. Keep the matching PDF manuals at the archive root for help images; missing manuals do not prevent the main planner from starting.
 - [Download the complete tool package](https://github.com/hp0411-oss/vault-print-planner-skill/raw/refs/heads/main/vault-print-planner-skill.zip) and extract it. Work inside the resulting `vault-print-planner-skill` folder containing `requirements.txt` and `skills/`. If you used GitHub’s **Code → Download ZIP**, extract the inner `vault-print-planner-skill.zip` too.
 
@@ -51,7 +61,9 @@ py -m venv .venv
 .\.venv\Scripts\python.exe skills/vault-print-planner/scripts/launch.py --archive "C:\path\to\261020_VAULT_USSA" --check
 ```
 
-The check must report **OK** for dependencies, local STLs, and P1S PLA/PETG profiles. For a 0.6 mm nozzle, add `--nozzle 0.6` to the check command; also choose 0.6 mm in the webpage. This command checks setup, not every possible model combination or print toolpath.
+For a different model, add `--printer "Bambu Lab A1 mini"` (or the exact model name shown in Studio) to `--check`. Select the same model in the webpage.
+
+The check must report **OK** for dependencies, local STLs, and the selected printer’s PLA/PETG profiles. For a 0.6 mm nozzle, add `--nozzle 0.6` to the check command; also choose 0.6 mm in the webpage. This command checks setup, not every possible model combination or print toolpath.
 
 ### 3. Start the website
 
@@ -73,9 +85,9 @@ Keep that terminal running and open **http://127.0.0.1:8766/planner.html** in Ch
 
 1. Choose a complete build or **Accessories only**, then size, module height, interior, cover, filament, and nozzle.
 2. Click **Check parts and plate layout**. Review missing-file/fit warnings, source filenames, whole-file quantities, supports, and hardware. Fix any blockers before export.
-3. Click **Save print task**, then **Generate P1S 3MF** in Print tasks. Wait for **Project ready – needs slicing**.
+3. Click **Save print task**, then **Generate 3MF** in Print tasks. Wait for **Project ready – needs slicing**.
 4. On macOS, use **Open in Bambu Studio**. Alternatively, find the generated `.3mf` under `skills/vault-print-planner/assets/app/output/job-<task-id>/` and open it as a **project** in Studio. Windows/Linux users must use this manual route; the automatic-open button is macOS-only.
-5. Verify P1S, nozzle, actual filament, build plate, AMS mapping, supports, and first-layer clearance. Slice each plate before sending it yourself. The planner does not automatically start a print.
+5. Verify the selected printer, nozzle, actual filament, build plate, AMS mapping, supports, and first-layer clearance. Slice each plate before sending it yourself. The planner does not automatically start a print.
 6. Record completed sets under Overall plan and print progress. For partial completion, use notes; a generated project is not a completed print.
 
 ### Restart, update, and troubleshoot
@@ -85,7 +97,7 @@ Keep that terminal running and open **http://127.0.0.1:8766/planner.html** in Ch
 - **Python not found / too old:** install Python 3.11+ and reopen the terminal. **requirements.txt not found:** change into the extracted tool folder first.
 - **Missing Python packages:** rerun pip using the same `.venv` Python used to start the planner. Internet access is needed for dependency installation; normal local planning uses offline mode.
 - **Archive must contain 01. DRAWERS / no STL models:** point to the correct fully extracted model root. Cloud-storage placeholders must be downloaded locally.
-- **Profile check failed:** complete Studio setup and ensure P1S/nozzle/PLA/PETG profiles exist. The check prints the directory it searches. Portable/Flatpak or unusual Studio installations may use different profile locations and are not verified by this release.
+- **Profile check failed:** complete Studio setup and ensure the selected printer/nozzle/PLA/PETG profiles exist. The check prints the directory it searches. Portable/Flatpak or unusual Studio installations may use different profile locations and are not verified by this release.
 - **Port in use:** use `--port 8767`, then open `http://127.0.0.1:8767/planner.html`. **Connection refused:** keep the terminal running and check the printed address and error messages.
 - **Missing help images:** place the original matching PDF manuals at the model archive root and restart. **Parts do not fit / missing files:** review size/version compatibility; do not scale assembly parts to force a fit.
 - The server is local and unauthenticated. Do not expose it to the public internet.
@@ -116,7 +128,7 @@ After choosing a build, filament, and nozzle, select **Check parts and plate lay
 | --- | --- |
 | Complete parts list | Source STL filenames, quantities, dimensions, thumbnails, support flags, and source notes. Quantities count complete STL files; a file can contain paired parts. |
 | Filament and nozzle | PLA or PETG and 0.4 / 0.6 mm are selected for the whole task. The tool does not automatically recommend a different material per part. Verify the actual product profile in Studio. |
-| Does it fit your printer? | Initial geometric layout for the supported P1S profile. Missing files or parts that cannot fit are reported. This does not certify fit for other printers or validate the final toolpaths. |
+| Does it fit your printer? | Initial geometric layout using the selected supported Bambu profile. Missing files or parts that cannot fit are reported. This does not certify fit for other printers or validate the final toolpaths. |
 | Plates and hardware | An initial per-plate file list plus separately purchased hardware and quantities. Hardware varies with the selected build. |
 | Guidance | Size naming, stacking and assembly references, source notes, support flags, and preflight reminders. Manuals are read from the local archive. |
 
@@ -152,7 +164,7 @@ Example: “Use $vault-print-planner to configure an M5 drawer build, add two re
 
 ## Printing scope
 
-The planner targets the P1S, 0.4 / 0.6 mm nozzles, and PLA / PETG. Exporting or opening a project does not start printing. A 3MF export still needs slicer inspection: verify the actual printer, nozzle, filament, plate, AMS mapping, start G-code, brim, and supports.
+The current main-branch planner discovers installed single-nozzle Bambu profiles, with 0.4 / 0.6 mm nozzles and PLA / PETG. P1S remains the default. Dual-nozzle models are listed as unsupported. Exporting or opening a project does not start printing. A 3MF export still needs slicer inspection: verify the actual printer, nozzle, filament, plate, AMS mapping, start G-code, brim, and supports.
 
 The packaged planner includes conservative front and edge clearances. Larger parts may require manual layout or separate plates; never scale assembly parts to fit. Old exported projects do not automatically receive updated clearances. Simplified previews do not validate dimensions, assembly tolerances, motion, load capacity, or stability.
 
@@ -164,7 +176,7 @@ It is a planner for your purchased USSA VAULT models. No STL model library is di
 
 ### Can I use it with Bambu Studio and a P1S?
 
-Yes. Initial planning supports Bambu Lab P1S, 0.4 / 0.6 mm nozzles, and PLA / PETG. Export a 3MF, then inspect and slice it in Bambu Studio. It is not a slicer or an automatic printer queue.
+Yes. P1S is the default; the current main-branch package also allows supported installed single-nozzle Bambu models. Nozzles remain 0.4 / 0.6 mm and materials PLA / PETG. Export a 3MF, then inspect and slice it in Bambu Studio. It is not a slicer or an automatic printer queue.
 
 ### Does the Codex skill require Codex to run the website?
 

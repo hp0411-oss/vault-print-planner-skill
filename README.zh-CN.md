@@ -1,10 +1,10 @@
-# VAULT 打印规划器 — Bambu Studio / P1S 3D 打印工具与 Codex Skill
+# VAULT 打印规划器 — Bambu Studio 3D 打印工具与 Codex Skill
 
 [English](README.md) | 中文
 
-**为 USSA VAULT 模块化收纳箱和抽屉规划 3D 打印，并导出 Bambu Studio 3MF 工程。** 这是非官方的本地打印规划器，也可以作为 Codex skill 使用。支持抽屉与翻盖箱选型、Gridfinity 底板和锁等配件补打、三维预览、STL 零件清单、P1S 初步排板、五金清单与打印进度记录。
+**为 USSA VAULT 模块化收纳箱和抽屉规划 3D 打印，并导出 Bambu Studio 3MF 工程。** 这是非官方的本地打印规划器，也可以作为 Codex skill 使用。支持抽屉与翻盖箱选型、Gridfinity 底板和锁等配件补打、三维预览、STL 零件清单、所选机型的初步排板、五金清单与打印进度记录。
 
-**[下载 v0.1.0 最新版](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0)** · [English guide](README.md)
+**[下载当前多机型版本](https://github.com/hp0411-oss/vault-print-planner-skill/raw/refs/heads/main/vault-print-planner-skill.zip)** · [原版 v0.1.0](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0) · [English guide](README.md)
 
 **不附带模型文件**：请自行购买，并使用本地模型目录。本工具不是 USSA Design 或 Bambu Lab 官方产品。
 
@@ -14,7 +14,19 @@
 
 中英文 VAULT 模块化收纳打印规划工具与 Codex skill：选组合、单独补配件、查看简化 3D 装配、保存/恢复打印任务、记录已打印数量及整体组合进度，并导出 Bambu Studio 3MF 工程。
 
-当前规划流程针对 P1S、0.4/0.6 mm 喷嘴、PLA/PETG。不会自动发送打印。必须使用自己合法取得的 VAULT 模型和说明书；仓库不附带模型；说明书的使用方式见下文。
+当前主分支支持读取本机 Bambu Studio 的单喷嘴机型配置，支持 0.4/0.6 mm 喷嘴和 PLA/PETG；P1S 为默认机型。不会自动发送打印。必须使用自己合法取得的 VAULT 模型和说明书；仓库不附带模型；说明书的使用方式见下文。
+
+## 多机型更新（主分支）
+
+**[下载当前多机型版本](https://github.com/hp0411-oss/vault-print-planner-skill/raw/refs/heads/main/vault-print-planner-skill.zip)**。已发布的 **v0.1.0 保留为原来的 P1S 版本**；下面的当前安装说明对应主分支安装包。早期截图和视频展示的是 v0.1.0，其中按钮仍写 P1S。
+
+检查组合前先选“打印机型号”。选项来自你本机的 Bambu Studio 配置，不代表所有拓竹机器均已支持。本机配置测试可识别 A1 mini、A1、P1P、P1S、P2S、X1、X1 Carbon、X1E、H2S、A2L；你看到的列表取决于 Studio 安装情况。当前仅支持矩形打印板的单喷嘴机型；H2C/H2D/H2D Pro/X2D 等双喷嘴配置标为暂不支持。暂不支持 0.2/0.8 mm 流程。
+
+所选机型决定排板尺寸、高度、禁区留量和导出预设。任务保存机型与喷嘴；没有机型字段的旧任务继续视为 P1S，已经导出的文件不会被修改。修改旧任务时，载入后选择新机型，重新检查并另存任务。
+
+自检其他机型时，在 `--check` 命令末尾加 `--printer "Bambu Lab A1 mini"`（替换为实际完整型号）；网页也要选同一机型。
+
+**验证范围：**40 个本机机型/喷嘴/耗材配置组合读取成功，六项回归测试通过；已导出并回读 P1S 0.4、A1 0.6、H2S 0.4 项目的机型、喷嘴、PETG 配置和板内几何。A1 mini 对过大的示例正确提示放不下，未知/双喷嘴机型被拒绝，旧任务保持 P1S。这些是 macOS 软件验证，不代表各机型已实打或验证了切片路径。
 
 ## 42 秒界面导览
 
@@ -31,7 +43,7 @@
 ### 1. 准备软件和已购买的模型
 
 - 安装 **Python 3.11 或更新版本**。Windows 安装时勾选添加到 PATH。macOS/Linux 用 `python3 --version`、Windows 用 `py --version` 检查版本。
-- 安装并打开一次 Bambu Studio，完成设置向导，启用 **P1S、实际使用的 0.4 或 0.6 mm 喷嘴，以及 PLA/PETG 耗材预设**。工具读取本机预设；仅做规划和导出时不需要连接打印机。
+- 安装并打开一次 Bambu Studio，完成设置向导，启用 **实际打印机型号、实际使用的 0.4 或 0.6 mm 喷嘴，以及 PLA/PETG 耗材预设**。工具读取本机预设；仅做规划和导出时不需要连接打印机。
 - 自行购买 VAULT 模型并完整解压。模型根目录应直接包含 `01. DRAWERS`、`02. SUSTAINERS`、`03. MODIFICATIONS`，不要选择 ZIP 或外层 Downloads 文件夹。本版使用 `261020_VAULT_USSA` 文件结构测试。对应 PDF 说明书放在模型根目录，供工具提取帮助图；没有说明书也能启动主体功能。
 - [下载完整工具包](https://github.com/hp0411-oss/vault-print-planner-skill/raw/refs/heads/main/vault-print-planner-skill.zip)并解压。进入包含 `requirements.txt` 和 `skills/` 的 `vault-print-planner-skill` 文件夹。如果用了 GitHub 的 **Code → Download ZIP**，还需要再解压里面的 `vault-print-planner-skill.zip`。
 
@@ -57,7 +69,7 @@ py -m venv .venv
 .\.venv\Scripts\python.exe skills/vault-print-planner/scripts/launch.py --archive "C:\实际路径\261020_VAULT_USSA" --check
 ```
 
-依赖、本地 STL、P1S 的 PLA/PETG 预设应显示 **OK**。如果用 0.6 mm 喷嘴，在自检命令末尾加 `--nozzle 0.6`，网页中也要选择 0.6 mm。自检检查安装环境，不代表所有模型组合或打印路径都已验证。
+依赖、本地 STL、所选机型的 PLA/PETG 预设应显示 **OK**。如果用 0.6 mm 喷嘴，在自检命令末尾加 `--nozzle 0.6`，网页中也要选择 0.6 mm。自检检查安装环境，不代表所有模型组合或打印路径都已验证。
 
 ### 3. 启动网页
 
@@ -79,9 +91,9 @@ Windows PowerShell：
 
 1. 选择整组组合或“只打印配件”，再选尺寸、模块高度、内部配置、顶盖、耗材和喷嘴。
 2. 点击“检查配件和排板”，核对缺文件/尺寸警告、源文件、整文件打印数量、支撑和五金。先解决阻止导出的错误。
-3. 点击“保存待打印任务”，在待打印任务中点“生成 P1S 3MF”，等到“工程就绪 · 待切片”。
+3. 点击“保存待打印任务”，在待打印任务中点“生成 3MF”，等到“工程就绪 · 待切片”。
 4. macOS 可以点“在 Bambu Studio 打开”。也可以到 `skills/vault-print-planner/assets/app/output/job-任务编号/` 找到 `.3mf`，在 Studio 中**作为项目打开**。Windows/Linux 需用这种手动方式，自动打开按钮目前只适用于 macOS。
-5. 核对 P1S、喷嘴、实际耗材、打印板、AMS 槽位、支撑和首层留量；逐盘切片后自行发送。工具不会自动启动打印。
+5. 核对所选打印机、喷嘴、实际耗材、打印板、AMS 槽位、支撑和首层留量；逐盘切片后自行发送。工具不会自动启动打印。
 6. 实物完成后到“总体规划与打印进度”填写完成套数。只完成部分打印板时先写备注，生成工程不等于打印完成。
 
 ### 重启、更新与常见问题
@@ -91,7 +103,7 @@ Windows PowerShell：
 - **找不到 Python / 版本过低：**安装 Python 3.11+ 后重开终端。**找不到 requirements.txt：**先进入正确的工具目录。
 - **缺少 Python 包：**用启动时同一个 `.venv` Python 重跑 pip 安装。安装依赖需要联网，平常本地规划使用离线模式。
 - **找不到 01. DRAWERS / STL：**选择完整解压后的模型根目录；云盘占位文件要先下载到本机。
-- **Profile check failed：**完成 Studio 向导并启用 P1S、喷嘴及 PLA/PETG 预设。自检会显示搜索的预设目录；便携版、Flatpak 或特殊安装路径尚未验证。
+- **Profile check failed：**完成 Studio 向导并启用所选打印机、喷嘴及 PLA/PETG 预设。自检会显示搜索的预设目录；便携版、Flatpak 或特殊安装路径尚未验证。
 - **端口占用：**改用 `--port 8767`，浏览器也改为 `http://127.0.0.1:8767/planner.html`。**无法连接：**检查终端是否仍在运行，以及输出的网址和报错。
 - **帮助图片缺失：**将匹配的原版 PDF 放到模型根目录后重启。**零件放不下/缺文件：**核对尺寸和模型版本，不要为塞进打印板而缩放装配零件。
 - 服务仅用于本机，没有远程登录认证，不要暴露到公网。
@@ -122,7 +134,7 @@ Windows PowerShell：
 | --- | --- |
 | 完整打印零件清单 | 对应 STL 文件、数量、尺寸、缩略图、支撑标记和源文件说明。数量按完整文件计算，一个文件可能已包含一对零件。 |
 | 耗材与喷嘴 | 整个任务选择 PLA / PETG 和 0.4 / 0.6 mm 喷嘴；目前不会自动为每个零件推荐不同材料，实际耗材型号需在 Studio 中核对。 |
-| 是否适合打印机 | 针对当前支持的 P1S 做初步几何排板，提示缺失文件或放不下的零件；不代表适配所有打印机，也不代表最终打印路径已经验证。 |
+| 是否适合打印机 | 读取所选支持机型的配置做初步几何排板，提示缺失文件或放不下的零件；不代表适配所有打印机，也不代表最终打印路径已经验证。 |
 | 分盘与五金 | 每盘对应的文件，以及需要另买的螺丝等五金名称和数量；清单随选型变化。 |
 | 相关说明 | 尺寸命名、堆叠与装配参考、源文件说明、支撑标记及开打前检查提醒；说明书从本地文件读取。 |
 
@@ -162,7 +174,7 @@ Windows PowerShell：
 
 **这是模型下载，还是打印规划工具？** 这是针对已购买 VAULT 模型的规划工具，不分发 STL 模型库。它把选型对应到本地文件，并生成可编辑工程。
 
-**可以用于拓竹 P1S 和 Bambu Studio 吗？** 支持 P1S、0.4 / 0.6 mm 喷嘴及 PLA / PETG 的初步规划。导出 3MF 后需要在 Bambu Studio 检查和切片；它不是切片器，也不会自动发送打印。
+**可以用于拓竹 P1S 和 Bambu Studio 吗？** P1S 为默认值；当前主分支还支持本机已安装的单喷嘴拓竹机型配置，喷嘴为 0.4 / 0.6 mm，耗材为 PLA / PETG。导出 3MF 后需要在 Bambu Studio 检查和切片；它不是切片器，也不会自动发送打印。
 
 **必须使用 Codex 吗？** 独立网页不需要 Codex 或 ChatGPT 订阅。需要助手协助规划时再安装可选 skill。
 
