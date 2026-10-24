@@ -1,6 +1,12 @@
-# VAULT Print Planner Skill
+# VAULT 打印规划器 — Bambu Studio / P1S 3D 打印工具与 Codex Skill
 
 [English](README.md) | 中文
+
+**为 USSA VAULT 模块化收纳箱和抽屉规划 3D 打印，并导出 Bambu Studio 3MF 工程。** 这是非官方的本地打印规划器，也可以作为 Codex skill 使用。支持抽屉与翻盖箱选型、Gridfinity 底板和锁等配件补打、三维预览、STL 零件清单、P1S 初步排板、五金清单与打印进度记录。
+
+**[下载 v0.1.0 预发布版](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0)** · [English guide](README.md)
+
+**不附带模型文件**：请自行购买，并使用本地模型目录。本工具不是 USSA Design 或 Bambu Lab 官方产品。
 
 下载仓库中的 `vault-print-planner-skill.zip` 并解压，以下路径以解压后的文件夹为准。
 
@@ -143,6 +149,18 @@ Windows PowerShell：
 导出的 3MF 是待检查的工程，不是已经验证可开打的指令。当前打包版补充了保守的前缘和板边留量；仍需检查实际起始 G-code、brim、支撑、材料预设及 AMS 对应关系。大件可能需要手动排板或分盘，不自动缩放。简化装配图不是精确装配仿真。
 
 原本一次打印中，小配件与前缘预挤出线重叠，因此 skill 明确要求把“几何放得下”和“实际首层路径无冲突”分开核对。已保存的历史工程不会自动套用新的留量。
+
+## 常见问题
+
+**这是模型下载，还是打印规划工具？** 这是针对已购买 VAULT 模型的规划工具，不分发 STL 模型库。它把选型对应到本地文件，并生成可编辑工程。
+
+**可以用于拓竹 P1S 和 Bambu Studio 吗？** 支持 P1S、0.4 / 0.6 mm 喷嘴及 PLA / PETG 的初步规划。导出 3MF 后需要在 Bambu Studio 检查和切片；它不是切片器，也不会自动发送打印。
+
+**必须使用 Codex 吗？** 独立网页不需要 Codex 或 ChatGPT 订阅。需要助手协助规划时再安装可选 skill。
+
+**可以只补打 Gridfinity 底板或锁吗？** 可以使用“只打印配件”，按箱体尺寸选择兼容文件，不必重新打印整个抽屉。它不是通用 Gridfinity 模型生成器。
+
+**Windows 和 Linux 可以用吗？** 已提供操作命令，但目前仅在 macOS 做过完整安装流程测试，请先阅读验证范围和限制。
 
 ## 来源与许可
 

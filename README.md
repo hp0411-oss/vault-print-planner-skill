@@ -1,8 +1,12 @@
-# VAULT Print Planner Skill
+# VAULT Print Planner — Bambu Studio 3D Printing Planner & Codex Skill
 
 English | [简体中文](README.zh-CN.md)
 
-A local bilingual planner and Codex skill for USSA VAULT modular drawers and storage boxes. Configure complete builds or accessories, inspect simplified 3D assemblies and actual STL parts, save and restore print tasks, track completed sets, and export Bambu Studio 3MF projects.
+**Plan USSA VAULT modular storage prints for Bambu Lab P1S, from drawer configuration to Bambu Studio 3MF export.** This unofficial, local 3D printing planner also works as a Codex skill. Choose drawers, hinged storage boxes, Gridfinity baseplates, locks, and replacement accessories; preview assemblies, review STL parts lists and hardware, check initial plate fit, and track print progress. Available in English and 简体中文.
+
+**[Download v0.1.0 (pre-release)](https://github.com/hp0411-oss/vault-print-planner-skill/releases/tag/v0.1.0)** · [Installation](#start-here-installation-and-first-use) · [Screenshots](#interface-preview) · [中文说明](README.zh-CN.md)
+
+VAULT models are **not included**: purchase them separately and use your local archive. This is not an official USSA Design or Bambu Lab product.
 
 Download **vault-print-planner-skill.zip** from this repository and extract it first. Paths below refer to the extracted folder.
 
@@ -143,6 +147,28 @@ Example: “Use $vault-print-planner to configure an M5 drawer build, add two re
 The planner targets the P1S, 0.4 / 0.6 mm nozzles, and PLA / PETG. Exporting or opening a project does not start printing. A 3MF export still needs slicer inspection: verify the actual printer, nozzle, filament, plate, AMS mapping, start G-code, brim, and supports.
 
 The packaged planner includes conservative front and edge clearances. Larger parts may require manual layout or separate plates; never scale assembly parts to fit. Old exported projects do not automatically receive updated clearances. Simplified previews do not validate dimensions, assembly tolerances, motion, load capacity, or stability.
+
+## Frequently asked questions
+
+### Is this a VAULT model download or a 3D printing planner?
+
+It is a planner for your purchased USSA VAULT models. No STL model library is distributed. The tool maps configurations to your local files and prepares editable print projects.
+
+### Can I use it with Bambu Studio and a P1S?
+
+Yes. Initial planning supports Bambu Lab P1S, 0.4 / 0.6 mm nozzles, and PLA / PETG. Export a 3MF, then inspect and slice it in Bambu Studio. It is not a slicer or an automatic printer queue.
+
+### Does the Codex skill require Codex to run the website?
+
+No. The standalone Python web application works in a local browser. Install the optional skill for agent-assisted planning; see the setup instructions above.
+
+### Can I print just a Gridfinity baseplate or replacement lock?
+
+Use Accessories only to select compatible parts without adding a complete drawer body. Options depend on your model archive and selected size; this is not a general-purpose Gridfinity model generator.
+
+### Does it support Windows and Linux?
+
+Instructions are included, but the clean-install workflow has only been tested on macOS. See the verification notes and known limitations before installing.
 
 ## Development
 
