@@ -6,6 +6,80 @@ A local bilingual planner and Codex skill for USSA VAULT modular drawers and sto
 
 Download **vault-print-planner-skill.zip** from this repository and extract it first. Paths below refer to the extracted folder.
 
+## Start here: installation and first use
+
+**You can run the website without Codex or a ChatGPT subscription.** The optional skill is for agent-assisted use. This is a local Python application, not a hosted online service or a one-click installer.
+
+### 1. Prepare the software and your purchased models
+
+- Install Python **3.11 or newer**. On Windows, enable the Python installer’s PATH option. Check with `python3 --version` on macOS/Linux or `py --version` on Windows.
+- Install Bambu Studio, open it once, finish the setup wizard, and enable **P1S**, your **0.4 or 0.6 mm nozzle**, and PLA/PETG filament profiles. The planner reads profiles from your local Studio configuration; a printer connection is not needed just to plan/export.
+- Purchase VAULT models separately and fully extract them. Use the folder directly containing `01. DRAWERS`, `02. SUSTAINERS`, and `03. MODIFICATIONS`, not the ZIP file or the parent Downloads folder. This version was tested with the `261020_VAULT_USSA` archive layout. Keep the matching PDF manuals at the archive root for help images; missing manuals do not prevent the main planner from starting.
+- [Download the complete tool package](https://github.com/hp0411-oss/vault-print-planner-skill/raw/refs/heads/main/vault-print-planner-skill.zip) and extract it. Work inside the resulting `vault-print-planner-skill` folder containing `requirements.txt` and `skills/`. If you used GitHub’s **Code → Download ZIP**, extract the inner `vault-print-planner-skill.zip` too.
+
+### 2. Install dependencies and check setup
+
+Replace the example paths below with your actual folders; keep quotes around paths with spaces. `--archive` is the **purchased model folder**, not the tool folder.
+
+macOS / Linux Terminal:
+
+```sh
+cd "/absolute/path/to/vault-print-planner-skill"
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python skills/vault-print-planner/scripts/launch.py --archive "/absolute/path/to/261020_VAULT_USSA" --check
+```
+
+Windows PowerShell:
+
+```powershell
+cd "C:\path\to\vault-print-planner-skill"
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe skills/vault-print-planner/scripts/launch.py --archive "C:\path\to\261020_VAULT_USSA" --check
+```
+
+The check must report **OK** for dependencies, local STLs, and P1S PLA/PETG profiles. For a 0.6 mm nozzle, add `--nozzle 0.6` to the check command; also choose 0.6 mm in the webpage. This command checks setup, not every possible model combination or print toolpath.
+
+### 3. Start the website
+
+macOS / Linux:
+
+```sh
+.venv/bin/python skills/vault-print-planner/scripts/launch.py --archive "/absolute/path/to/261020_VAULT_USSA" --port 8766
+```
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\python.exe skills/vault-print-planner/scripts/launch.py --archive "C:\path\to\261020_VAULT_USSA" --port 8766
+```
+
+Keep that terminal running and open **http://127.0.0.1:8766/planner.html** in Chrome or another browser. Do not double-click the HTML file. The address works on the computer running the server; it is not a shareable hosted website. The first load may take a moment to index models and extract local help images. Use the selector at the top right for English / 中文.
+
+### 4. Create the first project
+
+1. Choose a complete build or **Accessories only**, then size, module height, interior, cover, filament, and nozzle.
+2. Click **Check parts and plate layout**. Review missing-file/fit warnings, source filenames, whole-file quantities, supports, and hardware. Fix any blockers before export.
+3. Click **Save print task**, then **Generate P1S 3MF** in Print tasks. Wait for **Project ready – needs slicing**.
+4. On macOS, use **Open in Bambu Studio**. Alternatively, find the generated `.3mf` under `skills/vault-print-planner/assets/app/output/job-<task-id>/` and open it as a **project** in Studio. Windows/Linux users must use this manual route; the automatic-open button is macOS-only.
+5. Verify P1S, nozzle, actual filament, build plate, AMS mapping, supports, and first-layer clearance. Slice each plate before sending it yourself. The planner does not automatically start a print.
+6. Record completed sets under Overall plan and print progress. For partial completion, use notes; a generated project is not a completed print.
+
+### Restart, update, and troubleshoot
+
+- Stop with **Ctrl+C** in the server terminal. Next time, return to the same tool folder and rerun only the start command; do not recreate the virtual environment each time.
+- Tasks live in `skills/vault-print-planner/assets/app/print-jobs/`, progress in `print-progress.json`, and projects in `output/`. Back these up before replacing/upgrading the tool folder. Different extracted copies have separate records.
+- **Python not found / too old:** install Python 3.11+ and reopen the terminal. **requirements.txt not found:** change into the extracted tool folder first.
+- **Missing Python packages:** rerun pip using the same `.venv` Python used to start the planner. Internet access is needed for dependency installation; normal local planning uses offline mode.
+- **Archive must contain 01. DRAWERS / no STL models:** point to the correct fully extracted model root. Cloud-storage placeholders must be downloaded locally.
+- **Profile check failed:** complete Studio setup and ensure P1S/nozzle/PLA/PETG profiles exist. The check prints the directory it searches. Portable/Flatpak or unusual Studio installations may use different profile locations and are not verified by this release.
+- **Port in use:** use `--port 8767`, then open `http://127.0.0.1:8767/planner.html`. **Connection refused:** keep the terminal running and check the printed address and error messages.
+- **Missing help images:** place the original matching PDF manuals at the model archive root and restart. **Parts do not fit / missing files:** review size/version compatibility; do not scale assembly parts to force a fit.
+- The server is local and unauthenticated. Do not expose it to the public internet.
+
+**Verification (2026-10-23):** the public ZIP was downloaded and extracted into a clean directory, installed into a new macOS Python 3.13 environment, and tested against a locally purchased archive and existing Studio profiles. Preview, accessories, saving, 3MF export (archive structure), progress records, deletion/recovery, and the English UI passed. The improved preflight passed with profiles and failed clearly when profiles were absent. Windows/Linux commands are provided but have **not** been tested on those operating systems. No physical print or final slicer toolpath validation was performed during this installation test.
+
 ## Interface preview
 
 Actual interface screenshots using an example configuration, with no personal print records. The 3D assembly is a simplified illustration for feature reference, not a printable model or a validated assembly simulation. Model files must be purchased separately and used locally.
@@ -48,18 +122,6 @@ The example hardware list contains **8 × M4 × 14 mm bolts**. Verify head shape
 
 Use the language selector at the top right of the planner. Your current configuration and accessory quantities carry over, and the browser remembers your language. Both versions share the same saved tasks and print records. User-entered names, notes, original filenames, and images from the original manuals retain their original language. Save progress-record edits before switching languages.
 
-## Run the standalone planner
-
-Requires Python 3.11+, initialized Bambu Studio profiles, and your own legally obtained VAULT model archive and manuals. Model files are not included. See the model and manual policy below.
-
-```sh
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python skills/vault-print-planner/scripts/launch.py --archive '/path/to/VAULT' --port 8766
-```
-
-Open http://127.0.0.1:8766/planner.html in Chrome or another browser. On Windows, use `.venv\Scripts\python.exe`. The automatic Open in Bambu Studio action currently supports macOS only; open exported 3MF files manually on other systems. Keep the local server running. Do not expose this unauthenticated service to the public internet.
-
 ## Model purchase, local deployment, and manuals
 
 **This tool does not include or distribute VAULT model files. Each user must purchase the models from the designer or an authorized seller and comply with the model license.** Download and extract your purchased archive on your own computer, then pass that local folder to `--archive`. This tool and its AGPL license do not grant rights to the VAULT models.
@@ -69,6 +131,8 @@ Keep model files and anything containing their geometry local: STL/STEP/3MF file
 Manuals may be used as reference material for selection, printing, and assembly. Read the user’s local manuals when needed. A manual may also be included as a reference resource when its redistribution is permitted by the rights holder; permission to use a local manual is not automatically permission to republish it. No third-party manuals are bundled in the current package.
 
 ## Install the skill
+
+First complete the standalone setup above. The skill folder includes its own `requirements.txt`; if installing only that folder, create a virtual environment there and install those dependencies before running `scripts/launch.py`.
 
 Copy `skills/vault-print-planner` into `~/.codex/skills/` (or your `$CODEX_HOME/skills/` folder). Start a new session and invoke `$vault-print-planner`.
 
